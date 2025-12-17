@@ -1,117 +1,78 @@
-# Tarefa_constru-o_de_APIs_stackx
-Este projeto consiste em uma API REST desenvolvida com Node.js e Express, com o objetivo de praticar conceitos fundamentais de APIs, como CRUD, persistência de dados, validação de entradas e documentação
-API Products - Documentação 
+Documentação da API – Após revisão solicitada 
 
- 
+1. Visão Geral do Projeto 
 
-Este documento descreve o funcionamento da API Products desenvolvida em Node.js e Express. 
+Este projeto consiste em uma API REST desenvolvida em Node.js com Express. O objetivo é demonstrar persistênciaa de dados em arquivo JSON, validação de dados e documentação clara da API. 
 
- 
-
-OBJETIVO DO PROJETO 
-
-Criar uma API REST com persistência em arquivo JSON, validação de dados e documentação. 
-
- 
-
-TECNOLOGIAS 
+2. Tecnologias Utilizadas 
 
 - Node.js 
-
 - Express 
+- Zod (validação) 
+- fs (persistência em JSON) 
+- Prisma (dependência instalada, não obrigatória para esta etapa) 
 
-- Zod 
+3. Estrutura de Pastas 
 
-- fs (File System) 
+src/ 
+├─ controllers/ 
+├─ routes/ 
+├─ utils/ 
+├─ validations/ 
+└─ data/products.json 
 
+4. Persistência de Dados em JSON 
+
+Os dados são armazenados no arquivo products.json localizado em src/data. 
+A API utiliza o módulo nativo fs para leitura e escrita do arquivo sempre que ocorre uma operação de criação, atualização ou exclusão. 
+
+5. Validação de Dados 
+
+A validação é feita com a biblioteca Zod. 
+Campos obrigatórios: 
+- name: string (mínimo 3 caracteres) 
+- price: número positivo 
  
+Requisições inválidas retornam status 400. 
 
-COMO EXECUTAR O PROJETO 
+6. Rotas da API 
 
-1. Instale as dependências: 
+POST /products – Cadastrar produto 
+GET /products – Listar todos os produtos 
+GET /products/:id – Buscar produto por ID 
+PUT /products/:id – Atualizar produto 
+DELETE /products/:id – Remover produto 
 
-npm install 
+7. Exemplos de Requisição (Postman) 
 
- 
-
-2. Gere o Prisma Client (se necessário): 
-
-npx prisma generate 
-
- 
-
-3. Inicie o servidor: 
-
-npm run dev 
-
- 
-
-Caso apareça o erro abaixo ao executar o códigoo, faça o seguinte; 
-
-Error: @prisma/client did not initialize yet 
-
- 
-
-Execute: 
-
-npx prisma generate 
-
- 
-
-COMO TESTAR A API 
-
-Utilize o Postman ou Insomnia. (utilizei o Postman) 
-
-Base URL: 
-
-http://localhost:3000 
-
- 
-
-ROTAS DE PRODUTOS 
-
-POST /products 
-
-GET /products 
-
-GET /products/:id 
-
-PUT /products/:id 
-
-DELETE /products/:id 
-
- 
-
-EXEMPLO DE BODY (POST /products) 
-
+POST http://localhost:3000/products 
+Body (JSON): 
 { 
-
-  "name": "Produto Exemplo", 
-
-  "price": 100 
-
+  "name": "Mouse Gamer", 
+  "price": 199.90 
 } 
-
  
+Resposta esperada: status 201 com o produto criado. 
 
-PERSISTÊNCIA DE DADOS 
+8. Como Executar o Projeto 
 
-Os dados são armazenados no arquivo: 
+1. Instalar dependências: npm install 
+2. Iniciar servidor: npm run dev 
+3. Acessar: http://localhost:3000 
 
-src/data/products.json 
+9. Como Evitar Erro do Prisma 
 
+Caso apareça o erro: 
+Error: @prisma/client did not initialize yet 
  
+Execute: 
+npx prisma generate 
 
-VALIDAÇÃO 
+10. Como Testar a API 
 
-Os dados são validados com Zod garantindo consistência. 
+Utilize o Postman ou Insomnia. 
+Configure o método HTTP, informe a URL e envie o corpo da requisição em JSON. 
 
- 
+11. Considerações Finais 
 
-CONCLUSÃO 
-
-O projeto atende aos requisitos de persistência, validação e documentação solicitados. 
-
- 
-
-Obrigado! 
+O projeto atende aos requisitos da tarefa ao demonstrar persistência em JSON, validação de dados e documentação clara da API. 
